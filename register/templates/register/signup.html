@@ -1,0 +1,50 @@
+{% extends 'quiz/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        <style type="text/css">
+            .text-muted {
+                font-family: Courier;
+                color: #d696f2!important;
+            }
+
+            li::marker {
+                color: #c77e24;
+            }
+
+            .requiredField {
+                font-family: Courier;
+                color: white;
+            }
+
+            .form-group {
+                margin-top: 1rem;
+            }
+
+            .btn {
+                font-family: Courier;
+                color: white;
+                background-color: #c77e24;
+            }
+
+            .btn:hover {
+                color: #3424c7;
+            }
+        </style>
+        <div class="row justify-content-center">
+            <div class="col-lg-4"></div>
+            <div id="register" class="col-lg-4">
+                <form method="POST" class="form-group mx-3 mt-3">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn mt-3">Sign Up</button>
+                </form>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    {% endif %}
+{% endblock %}
