@@ -30,7 +30,15 @@
             </a>
             {% if user.is_authenticated %}
                 <ul class="nav">
-                    <!-- # <li></li> HERE -->
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Play</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
                 </ul>
             {% else %}
                 <ul class="nav">
