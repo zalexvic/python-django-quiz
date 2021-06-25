@@ -24,5 +24,8 @@ urlpatterns = [
     path('', quiz_views.index, name='index'),
     path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('sign-up/', reg_views.sign_up, name='sign_up')
+    path('sign-up/', reg_views.sign_up, name='sign_up'),
+    path('game/', quiz_views.play, name='game'),
+    path('update-score/', quiz_views.update_score, name='update_score'),
+    path('load-new-question/', quiz_views.load_new_question, name='load_new_question')
 ]

@@ -1,0 +1,318 @@
+{% extends 'quiz/base.html' %}
+
+{% block title %} Game {% endblock %}
+
+{% block content %}
+    <div class="h-75 row align-items-center">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="card mx-3">
+                <h5 id="difficulty" class="card-header text-center">{{ difficulty }}</h5>
+                <div id="question-body" class="card-body text-center">
+                    {% autoescape off %}
+                    <h5 id="category" class="card-title">{{ category }}</h5>
+                    <p id="question" class="card-text">{{ question }}</p>
+                    {% endautoescape %}
+                    {% for ind, answer in answers %}
+                        {% autoescape off %}
+                            <button id="ans-{{ ind }}" class="btn btn-primary mt-3">{{ answer }}</button><br>
+                        {% endautoescape %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        let correctAnswer = "{{ correct_answer }}";
+        let answersHidden = false;
+
+        if (document.getElementById("ans-3") === 'undefined' || document.getElementById("ans-3") === null) {
+            document.querySelector("#question-body").innerHTML += '<button id="ans-3" class="btn btn-primary mt-3"></button><br>';
+            document.querySelector("#question-body").innerHTML += '<button id="ans-4" class="btn btn-primary mt-3"></button><br>';
+            $('#ans-3').hide();
+            $('#ans-4').hide();
+            answersHidden = true;
+        }
+
+        document.querySelector("#ans-1").onclick = function(e) {
+            let btnValue = document.querySelector("#ans-1").innerHTML;
+            if (btnValue === correctAnswer) {
+                const incScore = 10;
+                $.ajax({
+                    url: "/update-score/",
+                    type: "post",
+                    data: {
+                        "score": incScore,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}"
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/load-new-question/",
+                    type: "get",
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+        };
+
+        document.querySelector("#ans-2").onclick = function(e) {
+            let btnValue = document.querySelector("#ans-2").innerHTML;
+            if (btnValue === correctAnswer) {
+                const incScore = 10;
+                $.ajax({
+                    url: "/update-score/",
+                    type: "post",
+                    data: {
+                        "score": incScore,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}"
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/load-new-question/",
+                    type: "get",
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+        };
+
+        document.querySelector("#ans-3").onclick = function(e) {
+            let btnValue = document.querySelector("#ans-3").innerHTML;
+            if (btnValue === correctAnswer) {
+                const incScore = 10;
+                $.ajax({
+                    url: "/update-score/",
+                    type: "post",
+                    data: {
+                        "score": incScore,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}"
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/load-new-question/",
+                    type: "get",
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+        };
+
+        document.querySelector("#ans-4").onclick = function(e) {
+            let btnValue = document.querySelector("#ans-4").innerHTML;
+            if (btnValue === correctAnswer) {
+                const incScore = 10;
+                $.ajax({
+                    url: "/update-score/",
+                    type: "post",
+                    data: {
+                        "score": incScore,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}"
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/load-new-question/",
+                    type: "get",
+                    dataType: "json",
+                    success: function(res) {
+                        correctAnswer = res.correct_answer;
+                        document.querySelector('#difficulty').innerHTML = res.difficulty;
+                        document.querySelector('#category').innerHTML = res.category;
+                        document.querySelector('#question').innerHTML = res.question;
+                        document.querySelector('#ans-1').innerHTML = res.answers[0][1];
+                        document.querySelector('#ans-2').innerHTML = res.answers[1][1];
+
+                        if (res.answers.length > 2) {
+                            document.querySelector('#ans-3').innerHTML = res.answers[2][1];
+                            document.querySelector('#ans-4').innerHTML = res.answers[3][1];
+                            if (answersHidden) {
+                                $('#ans-3').show();
+                                $('#ans-4').show();
+                                answersHidden = false;
+                            }
+                        }
+                        else {
+                            $('#ans-3').hide();
+                            $('#ans-4').hide();
+                            answersHidden = true;
+                        }
+                    }
+                });
+            }
+        };
+
+    </script>
+{% endblock %}

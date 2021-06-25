@@ -139,3 +139,5 @@ LOGOUT_REDIRECT_URL = "/"
 
 REDIS_HOST = os.environ.get('REDIS_HOST')
 REDIS_PORT = os.environ.get('REDIS_PORT')
+
+TRIVIA_API_QUESTION_URL = 'https://opentdb.com/api.php?amount=1'
