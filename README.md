@@ -7,7 +7,7 @@ A small quiz game application created with Django, Redis and Open Trivia Databas
 ## Features
 
 - **Big Amount Of Questions.** Open Trivia Database API provides 4,050 verified questions.
-- **Leaderboard.** Leaderboard, based on Redis, gives you ability to track your score on leaderboard.
+- **Leaderboard.** Leaderboard, based on Redis, gives you the ability to track your score on leaderboard.
 
 ## Installation
 
