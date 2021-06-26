@@ -66,6 +66,6 @@ A small quiz game application created with Django, Redis and Open Trivia Databas
 
 
 ## Resources
-Question Mark Pic: [Link](https://www.pixilart.com/art/pixel-mario-question-mark-block-a16e719614a255f)
-Riddler Pic: [Link](https://alcreed.tumblr.com/image/110508401819)
-Open Trivia Database API: [Link](https://opentdb.com/api_config.php)
+- Question Mark Pic: [Link](https://www.pixilart.com/art/pixel-mario-question-mark-block-a16e719614a255f)
+- Riddler Pic: [Link](https://alcreed.tumblr.com/image/110508401819)
+- Open Trivia Database API: [Link](https://opentdb.com/api_config.php)
