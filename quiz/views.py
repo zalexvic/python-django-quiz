@@ -1,6 +1,5 @@
 import redis
 import requests
-import pprint
 
 from random import shuffle
 

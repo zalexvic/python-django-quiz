@@ -13,7 +13,6 @@ def sign_up(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['username'])
             redis_instance.zadd('leaderboard', {form.cleaned_data['username']: 0})
             form.save()
             return redirect("/")
