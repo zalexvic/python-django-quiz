@@ -5,6 +5,14 @@
 {% block content %}
     {% if user.is_authenticated %}
         <style type="text/css">
+            p {
+                color: white;
+            }
+
+            #username {
+                color: #ff99cc;
+            }
+
             .table {
                 color: white;
                 background-color: #5c5694;
@@ -23,6 +31,7 @@
         <div class="h-75 row align-items-center mx-3">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
+                <p class="text-center">You: <span id="username">{{ user.username }}</span></p>
                 <table class="table table-bordered text-center">
                     <thead>
                         <tr>
@@ -61,6 +70,21 @@
                         <a class="btn mb-4 mt-2" href="?page={{ page.paginator.num_pages }}">Last</a>
                     {% endif %}
                 </div>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    {% else %}
+        <!-- width=242 height=529  h/w=2.18595041322 -->
+        <div class="h-75 row align-items-center">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 text-center">
+                <img src="/media/images/riddler.png" alt="riddler" width="92" height="200"/>
+                <h5 class="text-white mt-3"><span style="color: #ff99ff">QUIZ GAME</span></h5>
+                <p class="text-white mt-3">Welcome to QUIZ GAME.</p>
+                <p class="text-white">Answer various questions and compete in erudition with others. Your results will be displayed on the leaderboard.</p>
+                <p class="text-white">Questions are taken using the <a style="color: #00cc00;" href="https://opentdb.com/api_config.php" target="_blank">Open Trivia Database API</a></p>
+                <a class="btn btn-success" style="color: #99ff99;" href="/sign-up" role="button">Join</a>
+                <p class="text-white mt-3">You are already a player? Then <a style="color: #00cc00;" href="/login">Sign In</a></p>
             </div>
             <div class="col-lg-4"></div>
         </div>

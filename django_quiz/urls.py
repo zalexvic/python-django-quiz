@@ -17,6 +17,9 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from register import views as reg_views
 from quiz import views as quiz_views
 
@@ -28,4 +31,4 @@ urlpatterns = [
     path('game/', quiz_views.play, name='game'),
     path('update-score/', quiz_views.update_score, name='update_score'),
     path('load-new-question/', quiz_views.load_new_question, name='load_new_question')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
